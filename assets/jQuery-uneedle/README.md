@@ -1,0 +1,1 @@
+这是自定义插件，依赖jquery与webUploader

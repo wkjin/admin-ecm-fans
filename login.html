@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=0.45,minimum-scale=0.45,maximum-scale=1.5,user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>后台管理-杭州浩沅科技有限公司</title>
+    <link rel="stylesheet" href="./assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/sweetalert/sweetalert.css">
+    <!-- <link rel="stylesheet/less" href="./less/common-index.less">
+    <link rel="stylesheet/less" href="./less/login.less">
+    <script src="./assets/less.min.js"></script> -->
+    <link rel="stylesheet" href="./css/common-index.css">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <form action="" id="login-form" method="POST">
+                <div class="title">浩沅后台管理系统登录</div>
+                <div class="input-area">
+                    <i class="fa fa-user"></i>
+                    <input type="text" name="username" placeholder="请输入用户名" required>
+                </div>
+                <div class="input-area">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" name="password" placeholder="请输入密码" required>
+                </div>
+                <div class="handle-bar">
+                    <button type="reset">重置</button>
+                    <button type="submit">登录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="./assets/jquery-3.3.1.min.js"></script>
+<script src="./assets/template-web.js"></script>
+<script src="./assets/sweetalert/sweetalert.min.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/server.js"></script>
+<script src="./js/common-page.js"></script>
+<script>
+    var loginPage = {
+        _options: {
+            server: null,//从./server.js中导入
+            loginAreaSelector: '.login-form',
+            loginFormSelector: '#login-form',
+        },
+    
+        _isHasInit: false,//是否初始化
+        server: null,//使用的服务对象
+
+        $loginArea: null,//登录区域
+
+        _initData: function(){
+            var self = this;
+            
+            //检查是否已经初始化
+            if(self._isHasInit){//只进行一次初始化
+                return self;
+            }else{
+                self._isHasInit = true;
+            }
+
+            //初始化依赖对象
+            var _server = self._options.server;
+            if(typeof _server !== 'object' || _server === null){
+                _server = server.init();
+            }
+            self.server = server;
+
+            //初始化dom对象
+            self.$loginArea = $(self._options.loginAreaSelector);
+
+        },
+
+        _initEven: function(){
+            var self = this;
+            //绑定登录事件
+            self.$loginArea.find(self._options.loginFormSelector).off('submit').on('submit', function(e){
+                e.preventDefault();
+                var $this = $(this);
+                var formData = $this.serialize();
+                self.server.login(formData, function(res){
+                    if(res.status === 1){
+                        //登录成功
+                        swal({
+                            title: '登录成功',
+                            text: res.message,
+                            type: 'success',
+                            timer: 800
+                        }, function(){
+                            window.location.href = './index.html';
+                        });
+                    }else if(res.status === 0){
+                        //登录失败
+                        swal({
+                            title: '登录失败',
+                            text: res.message,
+                            type: 'error'
+                        });
+                    }else{
+                        swal({
+                            title: '系统错误',
+                            text: res.message,
+                            type: 'error'
+                        });
+                    }
+                });
+            })
+        },
+        
+        _initEnd: function(){
+            
+        },
+
+        init: function(options){
+            var self = this;
+            Object.assign(self._options, options);
+            self._initData();
+            self._initEven();
+            self._initEnd();
+        }
+    }
+    $(function(){
+        loginPage.init();
+    });
+</script>
+</html>

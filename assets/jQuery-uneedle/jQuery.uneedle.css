@@ -1,0 +1,67 @@
+/* 图片上传控件 */
+.u-img-upload-container,
+.u-img-html,
+.u-img-upload-file {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* 图片上传框 */
+.u-img-upload-container {
+  width: 6em;
+  height: 6em;
+  padding: 0.1em;
+  line-height: 1em;
+  font-size: inherit;
+  border-radius: .1em;
+  overflow: hidden;
+  cursor: pointer;
+  display: inline-block;
+  border: 1px dotted #999;
+  background: lightyellow;
+  position: relative;
+}
+/* 图片上传文字 */
+.u-img-upload-container .u-img-html {
+  float: initial;
+  position: initial;
+  display: block;
+  position: absolute;
+  text-align: center;
+  line-height: 1em;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 1em;
+  height: 1em;
+  font-size: 2em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #999;
+  font-weight: lighter;
+}
+/* 图片上传，文件提示 */
+.u-img-upload-container .u-img-upload-file {
+  display: none;
+  float: initial;
+  position: initial;
+  max-height: 100%;
+  max-width: 100%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  position: relative;
+}
+/* 有图片，显示的上传图片 */
+/*有上传图片*/
+.u-img-upload-has-img .u-img-upload-file {
+  display: block;
+}
+/* 有图片，显示的文字 */
+.u-img-upload-has-img .u-img-html {
+  display: none;
+}

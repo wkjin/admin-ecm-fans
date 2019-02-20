@@ -1,0 +1,431 @@
+<div class="content-fragments-container">
+    
+</div>
+<script type="text/html" id="fragments-tpl">
+    <table>
+        <tr>
+            <th>碎片名</th>
+            <th>碎片值（中）</th>
+            <th>碎片值（英）</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        {{each listData it i}}
+        <tr data-json="{{it}}">
+            <td>{{it.description}}</td>
+            <td>
+                {{if typeof it.value_cn === 'object'}}
+                    {{each it.value_cn it_vc i_vc}}
+                        {{if it.column_type === 'imgArr'}}
+                            <img src="{{it_vc}}" >&nbsp;&nbsp;
+                        {{else/}}
+                            {{it_vc}}&nbsp;&nbsp;
+                        {{/if}}
+                    {{/each}}
+                {{else/}}
+                    {{if it.column_type === 'img'}}
+                        <img src="{{it.value_cn}}">
+                    {{else/}}
+                        {{it.value_cn}}
+                    {{/if}}
+                {{/if}}
+            </td>
+            <td>
+                {{if typeof it.value_en === 'object'}}
+                    {{each it.value_en it_ve i_ve}}
+                    {{if it.column_type === 'imgArr'}}
+                        <img src="{{it_ve}}">&nbsp;&nbsp;
+                    {{else/}}
+                        {{it_ve}}&nbsp;&nbsp;
+                    {{/if}}
+                    {{/each}}
+                {{else/}}
+                    {{if it.column_type === 'img'}}
+                        <img src="{{it.value_en}}">
+                    {{else/}}
+                        {{it.value_en}}
+                    {{/if}}
+                {{/if}}
+            </td>
+            <td>{{if it.status === '1'}}启用{{else}}停用{{/if}}</td>
+            <td>
+                <button data-handle="edit"><i class="fa fa-edit"></i></button>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+</script>
+
+<!-- 编辑产品 -->
+<script type="text/html" id="edit-fragment-tpl">
+    <div class="fragment-edit-form-area">
+        <form action="" id="content-edit-form-area">
+            <h2 class="text-center">碎片信息编辑</h2>
+            <div class="content-edit-tip">温馨提醒：中英文相同，可以只是填写其中之一</div>
+            <div class="form-content-area">
+                <div class="left-area">
+                    <input type="hidden" name="id" value="{{fragment.id}}">
+                    <div>
+                        <h4>碎片标记位置</h4>
+                        <div>{{fragment.key}}</div>
+                    </div>
+                    <div>
+                        <h4><label for="fragment-description">描述</label></h4>
+                        <div>
+                            <input type="text" name="description" value="{{fragment.description}}" id="fragment-description">
+                        </div>
+                    </div>
+                    <div>
+                        <h4>状态</h4>
+                        <div>
+                            <label for="fragment-status-1">启用</label>
+                            <input type="radio" name="status" id="fragment-status-1" value="1" {{if fragment.status === '1'}}checked{{/if}}>
+                            <label for="fragment-status-0">停用</label>   
+                            <input type="radio" name="status" id="fragment-status-0" value="0" {{if fragment.status === '0'}}checked{{/if}}>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-area">
+                    <div class="key-values">
+                        <h4>值</h4>
+                        <div>
+                            <h6>中文</h6>
+                            <div class="fragment-value-cn">
+                                {{if fragment.column_type === 'imgArr' || fragment.column_type === 'textArr'}}
+                                    {{each fragment.value_cn fv i_fv}}
+                                    <div>
+                                        {{if fragment.column_type === 'imgArr'}}
+                                        <span class="fragment-thumb-cn" data-img="{{fv}}"></span>
+                                        {{/if}}
+                                        <input type="{{fragment.column_type === 'imgArr'?'hidden':'text'}}" value="{{fv}}">
+                                        <i class="fa fa-remove"></i>
+                                    </div>
+                                    {{/each}}
+                                    <div class="value-handle-bar">
+                                        <button data-type="{{fragment.column_type}}" type="button"><i class="fa fa-plus"></i> 添加一个子项</button>
+                                    </div>
+                                    <input type="hidden" name="value_cn" value="{{fragment.value_cn}}">
+                                {{else if fragment.column_type === 'img'}}
+                                    <span class="fragment-thumb-cn" data-img="{{fragment.value_cn}}"></span>
+                                    <input type="hidden" name="value_cn" value="{{fragment.value_cn}}">
+                                {{else if fragment.column_type === 'textarea'}}
+                                    <textarea name="value_cn" cols="30" rows="10">{{fragment.value_cn}}</textarea>
+                                {{else if fragment.column_type === 'color'}}
+                                    <input type="color" name="value_cn" value="{{fragment.value_cn}}">
+                                {{else}}
+                                    <input type="text" name="value_cn" value="{{fragment.value_cn}}">
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div>
+                            <h6>英文</h6>
+                            <div class="fragment-value-en">
+                                {{if fragment.column_type === 'imgArr' || fragment.column_type === 'textArr'}}
+                                    {{each fragment.value_en fv i_fv}}
+                                    <div>
+                                        {{if fragment.column_type === 'imgArr'}}
+                                        <span class="fragment-thumb-en" data-img="{{fv}}"></span>
+                                        {{/if}}
+                                        <input type="{{fragment.column_type === 'imgArr'?'hidden':'text'}}" value="{{fv}}">
+                                        <i class="fa fa-remove"></i>
+                                    </div>
+                                    {{/each}}
+                                    <div class="value-handle-bar">
+                                        <button data-type="{{fragment.column_type}}"  type="button"><i class="fa fa-plus"></i> Add Item</button>
+                                    </div>
+                                    <input type="hidden" name="value_en" value="{{fragment.value_en}}">
+                                {{else if fragment.column_type === 'img'}}
+                                    <span class="fragment-thumb-en" data-img="{{fragment.value_en}}"></span>
+                                    <input type="hidden" name="value_en" value="{{fragment.value_en}}">
+                                {{else if fragment.column_type === 'textarea'}}
+                                    <textarea name="value_en" cols="30" rows="10">{{fragment.value_en}}</textarea>
+                                {{else if fragment.column_type === 'color'}}
+                                    <input type="color" name="value_en" value="{{fragment.value_en}}">
+                                {{else}}
+                                    <input type="text" name="value_en" value="{{fragment.value_en}}">
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-handle-bar">
+                <button class="js-edit-form-close" type="button"><i class="fa fa-close"></i> 关闭</button>
+                <button class="submit" type="submit"><i class="fa fa-save"></i> 保存</button>
+            </div>
+        </form>
+    </div>
+</script>
+<!--一个子项的值创建-->
+<script type="text/html" id="fragment-item-value-tpl">
+    <div>
+        {{if column_type === 'imgArr'}}
+        <span class="fragment-thumb-cn"></span>
+        {{/if}}
+        <input type="{{column_type === 'imgArr'?'hidden':'text'}}" value="{{fv}}">
+        <i class="fa fa-remove"></i>
+    </div>
+</script>
+
+<script>
+if(typeof commonPage === 'object'){
+    if(typeof commonPage.fragmentsTplObj !== 'object'){
+        commonPage.fragmentsTplObj = {
+            _options: {
+                tplContainerSelector: '.content-fragments-container',//模板容器的选择器
+                tplId: 'fragments-tpl',//模板id
+                editFragmentTplId: 'edit-fragment-tpl',//碎片编辑模板的id
+                fragmentItemValueTplId: 'fragment-item-value-tpl',//碎片子项的模板id
+
+                //值操作栏
+                valueAddItemSelector: '.value-handle-bar > button:first-child',//添加子项
+                valueContainerSelector: '.key-values',//值容器选择器
+
+                
+                editFormSelector: '#content-edit-form-area',//form表单选择器
+                editFormCloseSelector: '.js-edit-form-close',//编辑form关闭选择器
+                fragmentValueEnContainerSelector: '.fragment-value-en',//碎片英文值容器选择器
+                fragmentValueCnContainerSelector: '.fragment-value-cn',//碎片中文值容器选择器
+
+                //中文值图片选择器
+                fragmentValueThumbCnSelector: '.fragment-thumb-cn',//中文值缩略图的选择器
+                fragmentValueThumbEnSelector: '.fragment-thumb-en',//中文值缩略图的选择器
+            },
+
+            $tpl: null,//模板容器
+            commonPage: null,
+            server: null,
+
+            _initData: function(){
+                var self = this;
+                
+                self.$tpl = $(self._options.tplContainerSelector);
+
+                //注入对象
+                self.commonPage = commonPage;
+                self.server = commonPage.server;
+                
+                //按照字段类型进行数据整理（1、text 2、textArr 3、img 4、imgArr 5、color 6、textarea）
+                var fragmentsData = self.commonPage.data.fragments;
+                for(var i=0,item=null;i<fragmentsData.length;i++){
+                    item = fragmentsData[i];
+                    if(item.column_type === 'textArr' || item.column_type === 'imgArr'){
+                        if(typeof item.value_cn === 'string'){
+                            fragmentsData[i].value_cn = item.value_cn.split('|');
+                        }
+                        if(typeof item.value_en === 'string'){
+                            fragmentsData[i].value_en = item.value_en.split('|');
+                        }
+                    }
+                }
+                //获取数据并填充
+                var html = template(self._options.tplId, {
+                    listData: fragmentsData
+                });
+                self.$tpl.html(html);
+            },
+
+            _initEven: function(){
+                var self = this;
+                //绑定产品编辑事件
+                self.commonPage.$rightObj.find(self._options.tplContainerSelector).on('click', 'button',function(){
+                    var $this = $(this);
+                    var handle = $this.data('handle');
+                    var fragmentData = $this.parent('td').parent('tr').data('json');
+                    if(handle === 'edit'){
+                        self._editFragment(null, fragmentData);
+                    }else{
+                        console.log('点击按钮不存在');
+                    }
+                });
+            },
+
+            //编辑框加载函数
+            _editFragment: function(e, fragment){
+                var self = this;
+                fragment = (typeof fragment === 'object' && fragment !== null)?fragment:{};
+                var html = template(self._options.editFragmentTplId, {
+                    fragment: fragment,
+                });
+                self.commonPage.showContentAreaMark(html, function(){
+                    self._addEditTemplateEven();
+                });
+            },
+            //绑定编辑框的事件
+            _addEditTemplateEven: function(){
+                var self = this;
+
+                //初始化碎片中图片是值
+                self._initValueThumb(self._options.fragmentValueThumbCnSelector);
+                self._initValueThumb(self._options.fragmentValueThumbEnSelector);
+
+                //绑定添加一个值事件
+                self.commonPage.$rightObj.find(self._options.valueAddItemSelector).off('click').on('click', function(e){
+                    var $this = $(this);
+                    var $html = $(template(self._options.fragmentItemValueTplId, {
+                        column_type: $this.data('type')
+                    }));
+                    $this.parent().before($html);
+                    $html.find('input').focus();
+                    self._initValueThumb(self._options.fragmentValueThumbCnSelector);
+                    self._initValueThumb(self._options.fragmentValueThumbEnSelector);
+                });
+
+                //绑定移除值事件
+                self.commonPage.$rightObj.find(self._options.valueContainerSelector).on('click', '.fa-remove', function(e){
+                    var $this = $(this);
+                    var $parent = $this.parent();
+                    swal({
+                        title : "移除子项提醒",
+                        text : "确定移除子项“" + ($parent.find('input').val()) + "”",
+                        type : "warning",
+                        showCancelButton : true,
+                        confirmButtonColor : '#f8bb86',
+                        confirmButtonText : '移除',
+                        cancelButtonText : "取消",
+                        closeOnConfirm : true
+                    },function(status){
+                        if(status){
+                            $parent.remove();
+                        }
+                    });
+                });
+
+                //提交事件
+                self.commonPage.$rightObj.find(self._options.editFormSelector).off('submit').on('submit', function(e){
+                    e.preventDefault();
+                    var $this = $(this);
+                    //更新表单的值
+                    self._arrangeValue(self._options.fragmentValueCnContainerSelector);//整理中文值
+                    self._arrangeValue(self._options.fragmentValueEnContainerSelector);//整理英文值
+                    var data = self.commonPage.serializeFormObject($this);
+                    if(parseInt(data.id) <= 0){
+                        swal({
+                            title: '页面出错',
+                            text: '数据不完整，请刷新重试',
+                            type: 'error'
+                        });
+                        return;
+                    }
+                    if(data.value_cn === '' && data.value_en === ''){
+                        swal({
+                            title: '值出错',
+                            text: '中文、英文至少填写一项',
+                            type: 'error'
+                        });
+                        return;
+                    }
+                    self.server.saveFragment(data, function(res){
+                        if(res.status === 1){
+                            swal({
+                                title: res.message,
+                                text: '保存成功',
+                                type: 'success',
+                                timer: 1000
+                            },function(){
+                                window.history.go(0);
+                            });
+                        }else{
+                            swal({
+                                title: res.message,
+                                text: '保存失败，请检查后再保存',
+                                type: 'error',
+                                timer: 1000
+                            });
+                        }
+                    });
+                });
+                
+                 //关闭事件
+                self.commonPage.$rightObj.find(self._options.editFormCloseSelector).off('click').on('click', function(){
+                    swal({
+                        title : "关闭碎片编辑框",
+                        text : "信息将丢失，是否继续",
+                        type : "warning",
+                        showCancelButton : true,
+                        confirmButtonColor : '#f8bb86',
+                        confirmButtonText : '继续关闭',
+                        cancelButtonText : "取消",
+                        closeOnConfirm : true
+                    },function(status){
+                        if(status){
+                            self.commonPage.hideContentAreaMark(function(){
+                                console.log('编辑框被关闭');
+                            });
+                        }
+                    });
+                });
+            },
+            
+            //init值图片
+            _initValueThumb: function(selector){
+                var self = this;
+                var $cnAll = self.commonPage.$rightObj.find(selector);
+                if($cnAll.length > 0){
+                    $cnAll.each(function(){
+                        var $this = $(this);
+                        var randomId = 'input-value-thumb-' + parseInt(Math.random() * 1000000);
+                        $this.prop('id', randomId);
+                        self.commonPage.createFileUpload({
+                            dnd: '#' + randomId,
+                            init: {
+                                imgUrl: $this.data('img')
+                            }
+                        }, {
+                            uploadSuccess: function(file, res){
+                                if(res.errno === 0){
+                                    var src = res.data[0];
+                                    $this.parent().find('> input').val(src);
+                                }
+                            }
+                        });
+                    });
+                }
+                
+            },
+
+            //整理值
+            _arrangeValue: function(valueContainer){
+                var self = this;
+                var $this = $(valueContainer);
+                if($this.length > 0){
+                    var $item = $this.find('> div');
+                    var $input = $this.find('> input');
+                    var value = [];
+                    if($item.length > 0 ){//值是数组
+                        $item.each(function(){
+                            var $me = $(this);
+                            var $meInput = $me.find('> input'); 
+                            if($meInput.length > 0){
+                                value.push( $meInput.val());
+                            }
+                        });
+                    }
+                    if($input.length > 0 && value.length > 0){
+                        $input.val(value.join('|'));
+                    }else{
+                        console.error('值出错');
+                    }
+                }else{
+                    console.log('值容器出错');
+                }
+            },
+            
+            _initEnd: function(){
+                var self = this;
+                /* self._editFragment(null, {"id":"22","key":"air_volume","description":"风量[m³/h]（下拉菜单中每个值以|分割）","value_cn":["","0-2500","2500-5000","5000-10000","10000-15000","15000-20000","20000-25000","20000-25000"],"value_en":["","0-2500","2500-5000","5000-10000","10000-15000","15000-20000","20000-25000","20000-25000"],"created_by":null,"create_time":"0","updated_by":"1","update_time":"0","column_type":"textArr","status":"1"}); */
+            },
+
+            init: function(){
+                var self = this;
+                self._initData();
+                self._initEven();
+                self._initEnd();
+                console.log('fragmentsTpl模板启动中');
+            }
+        }
+    }    
+}else{
+    console.log('加载tpl必须在commonPage加载完毕后加载');
+}  
+</script>

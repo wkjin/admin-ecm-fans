@@ -1,0 +1,98 @@
+//功能：公共的clas、id与变量定义
+
+//START==========  1、变量  ==================
+@minWidth: 1200px;//页面的最小宽度
+@maxWidth: 1600px;//页面的最大宽度
+@defaultFontColor: #333333;
+@primaryColor: #4395ff;
+@defaultBackground: #ffffff;
+@defaultStyleColor: #c5e3f1;
+@defaultBorderRadus: 3px;
+@defaultBorder: 1px solid #fafafa;
+@aTagHoverColor: #4395ff;
+
+
+@black0: #000000;
+@black1: #111111;
+@black2: #222222;
+@black3: #333333;
+@black4: #444444;
+@black5: #555555;
+@black6: #666666;
+@black7: #777777;
+@black8: #888888;
+@black9: #999999;
+@blackA: #aaaaaa;
+@blackB: #bbbbbb;
+@blackC: #cccccc;
+@blackD: #dddddd;
+@blackE: #eeeeee;
+@blackF: #ffffff;
+
+@blackF5: #F5F5F5;
+@blackFb: #fbfbfb;
+
+//END============ 变量 =======================
+
+
+//START==========  2、公共class、id  ==========
+
+//对overflow处理
+.overflow(@overflowX, @overflowY){
+    overflow-x: @overflowX;
+    overflow-y: @overflowY;
+    -webkit-overflow-scrolling: touch;
+}
+
+// 图片无法拖拽与选中
+.imgUnHandle(){
+    user-drag: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none;
+    -khtml-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none; 
+    user-select: none;
+}
+
+.textUnHandle(){
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+//滚动条没有颜色
+.scrollbarNoColor(){
+    scrollbar-3dlight-color: transparent;
+    scrollbar-darkshadow-color: transparent;
+    scrollbar-highlight-color: transparent;
+    scrollbar-shadow-color: transparent;
+    scrollbar-arrow-color: transparent;
+    scrollbar-face-color: transparent;
+    scrollbar-track-color: transparent;
+    scrollbar-base-color: transparent;
+    scroll-behavior: smooth;
+}
+
+ /* 多行省略 */
+ .ellipsis(@row) {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: @row;
+    -webkit-box-orient: vertical;
+}
+
+/* 清除浮动 */
+.clearfix(){
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
+}
+
+//END============ 公共class、id ===============

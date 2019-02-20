@@ -1,0 +1,63 @@
+<div class="content-index-container">
+    <script type="text/html" id="index-tpl">
+        <div class="right-content-index">
+            <h2>{{title}}</h2>
+            {{each descList it i}}
+            <p>{{it}}</p>
+            {{/each}}
+        </div>
+    </script>
+</div>
+
+<script>
+if(typeof commonPage === 'object'){
+    if(typeof commonPage.indexTplObj !== 'object'){
+        commonPage.indexTplObj = {
+            _options: {
+                tplContainerSelector: '.content-index-container',//模板容器的选择器
+                tplId: 'index-tpl',//模板id
+            },
+
+            $tpl: null,//模板容器
+
+            _initData: function(){
+                var self = this;
+                
+                self.$tpl = $(self._options.tplContainerSelector);
+                
+                //填充内容
+                var html = template(self._options.tplId, {
+                    title: '欢迎访问杭州浩沅科技有限公司',
+                    descList: [
+                        '栏目名称信息，在栏目管理中设置',
+                        '站点基本信息，在碎片管理中设置',
+                        '浩沅课堂，新闻资讯，都在新闻中管理',
+                        '产品信息，在产品管理中编辑',
+                        '产品代理信息，请在代理管理中设置'
+                    ]
+                });
+                self.$tpl.html(html);
+                
+            },
+
+            _initEven: function(){
+                
+            },
+
+            _initEnd: function(){
+                
+            },
+
+            init: function(){
+                var self = this;
+                self._initData();
+                self._initEven();
+                self._initEnd();
+                console.log('index模板启动中');
+            }
+        }
+    }    
+}else{
+    console.log('加载tpl必须在commonPage加载完毕后加载');
+}  
+</script>

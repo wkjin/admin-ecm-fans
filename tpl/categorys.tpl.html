@@ -1,0 +1,330 @@
+<div class="content-categorys-container"></div>
+<script type="text/html" id="categorys-tpl">
+    <table>
+        <tr>
+            <th>栏目名（中）</th>
+            <th>栏目名（英）</th>
+            <th>排序</th>
+            <th>栏目URL</th>
+            <th>缩略图（中）</th>
+            <th>缩略图（英）</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        {{each listData it i}}
+        <tr class="layer0" data-json="{{it}}" data-next="顶级">
+            <td>{{it.name_cn}}</td>
+            <td>{{it.name_en}}</td>
+            <td>{{it.sort}}</td>
+            <td>{{it.url}}</td>
+            <td><img src="{{it.thumb_cn}}"></td>
+            <td><img src="{{it.thumb_en}}"></td>
+            <td>{{if it.status === '1'}}启用{{else}}停用{{/if}}</td>
+            <td>
+                <button data-handle="edit"><i class="fa fa-edit"></i></button>
+            </td>
+        </tr>
+            {{if it._child.length > 0}}
+            {{each it._child it_i i_i}}
+                <tr class="layer1" data-json="{{it_i}}" data-next="{{it.name_cn}}">
+                    <td>&nbsp;&nbsp;|-&nbsp;&nbsp;{{it_i.name_cn}}</td>
+                    <td>{{it_i.name_en}}</td>
+                    <td>{{it_i.sort}}</td>
+                    <td>{{it_i.url}}</td>
+                    <td><img src="{{it_i.thumb_cn}}"></td>
+                    <td><img src="{{it_i.thumb_en}}"></td>
+                    <td>{{if it.status === '1'}}启用{{else}}停用{{/if}}</td>
+                    <td>
+                        <button data-handle="edit"><i class="fa fa-edit"></i></button>
+                    </td>
+                </tr>
+            {{/each}}
+            {{/if}}
+        {{/each}}
+    </table>
+</script>
+
+<!-- 编辑栏目-->
+<script type="text/html" id="edit-category-tpl">
+    <div class="category-edit-form-area">
+        <form action="" id="content-edit-form-area">
+            <h2 class="text-center">栏目信息编辑</h2>
+            <div class="content-edit-tip">温馨提醒：中英文相同，可以只是填写其中之一</div>
+            <div class="form-content-area">
+                <div class="left-area">
+                    <input type="hidden" name="id" value="{{category.id}}">
+                    <div>
+                        <h4>栏目名字</h4>
+                        <div>
+                            <input type="text" name="name_cn" value="{{category.name_cn}}" placeholder="请输入中文栏目名"><br/>
+                            <input type="text" name="name_en" value="{{category.name_en}}" placeholder="请输入英文栏目名"> 
+                        </div>
+                    </div>
+                    <div>
+                        <h4>上一级栏目</h4>
+                        <div>
+                            <select name="category_id" required>
+                                <option value="0">顶级栏目</option>
+                                {{each categorys it i}}
+                                <option value="{{it.id}}" {{if it.id == category.p_id }}selected{{/if}} >{{it.name_cn}}（{{it.name_en}}）</option>
+                                {{/each}}
+                            </select>    
+                        </div>
+                    </div>
+                    <div>
+                        <h4>是否首页</h4>
+                        <div>
+                            <label for="category-index-1">是</label>
+                            <input type="radio" name="is_index" id="category-index-1" value="1" {{if category.is_index === '1'}}checked{{/if}}>
+                            <label for="category-status-0">否</label>   
+                            <input type="radio" name="is_index" id="category-index-0" value="0" {{if category.is_index === '0'}}checked{{/if}}>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>是否栏目页</h4>
+                        <div>
+                            <label for="category-category-1">是</label>
+                            <input type="radio" name="is_category" id="category-category-1" value="1" {{if category.is_category === '1'}}checked{{/if}}>
+                            <label for="category-status-0">否</label>   
+                            <input type="radio" name="is_category" id="category-category-0" value="0" {{if category.is_category === '0'}}checked{{/if}}>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>栏目状态</h4>
+                        <div> 
+                            排序（升序排序）
+                            <input type="number" name="sort" value="{{category.sort?category.sort:1}}" min="0" max="999">
+                        </div>
+                        <div> 
+                            是否启用：
+                            <label for="status-1">启用</label><input type="radio" id="status-1" name="status" value="1" {{if category.status == 1 }}checked{{/if}} required>
+                            <label for="status-0">停用</label><input type="radio" name="status" value="0" id="status-0" {{if category.status == 0 }}checked{{/if}}>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-area">
+                    <div>
+                        <h4>跳转URL</h4>
+                        <div class="handle-area">
+                            <input type="text" name="url" value="{{category.url}}" placeholder="请输入跳转URL">
+                        </div>
+                    </div>
+                    <div>
+                        <h4>缩略图</h4>
+                        <div class="handle-area" style="font-size:  30px;">
+                            <div class="left">
+                                <h6>中文</h6>
+                                <div data-img="{{category.thumb_cn}}" id="category-thumb-cn"></div>  
+                            </div>
+                            <div class="right">
+                                <h6>英文</h6>
+                                <div data-img="{{category.thumb_en}}" id="category-thumb-en"></div>
+                            </div>
+                            <input type="hidden" name="thumb_cn" value="{{category.thumb_cn}}">
+                            <input type="hidden" name="thumb_en" value="{{category.thumb_en}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-handle-bar">
+                <button class="js-edit-form-close" type="button"><i class="fa fa-close"></i> 关闭</button>
+                <button class="submit" type="submit"><i class="fa fa-save"></i> 保存</button>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script>
+if(typeof commonPage === 'object'){
+    if(typeof commonPage.categorysTplObj !== 'object'){
+        commonPage.categorysTplObj = {
+            _options: {
+                tplContainerSelector: '.content-categorys-container',//模板容器的选择器
+                tplId: 'categorys-tpl',//模板id
+                editCategoryTplId: 'edit-category-tpl',//栏目编辑模板的id
+
+                editFormSelector: '#content-edit-form-area',//form表单选择器
+                editFormCloseSelector: '.js-edit-form-close',//编辑form关闭选择器
+
+                //缩略图
+                thumbCnSelector: '#category-thumb-cn',//中文缩略图
+                thumbCnInputSelector: 'input[name=thumb_cn]',
+                thumbEnSelector: '#category-thumb-en',//引文缩略图
+                thumbEnInputSelector: 'input[name=thumb_en]',
+            },
+
+            $tpl: null,//模板容器
+            commonPage: null,
+            server: null,
+
+            _initData: function(){
+                var self = this;
+                
+                self.$tpl = $(self._options.tplContainerSelector);
+
+                //注入对象
+                self.commonPage = commonPage;
+                self.server = commonPage.server;
+                
+                //获取数据并填充
+                self.server.getCategorysList(function(res){
+                    if(res.status === 1){
+                        var html = template(self._options.tplId, {
+                            listData: res.data
+                        });
+                        self.$tpl.html(html);
+                    }else{
+                        swal({
+                            title: '获取信息失败',
+                            text: res.message,
+                            type: 'error'
+                        }, function(){
+                            window.history.go(0);
+                        });
+                    }
+                });
+                
+            },
+
+            _initEven: function(){
+                var self = this;
+                //绑定产品编辑事件
+                self.commonPage.$rightObj.find(self._options.tplContainerSelector).on('click', 'button',function(){
+                    var $this = $(this);
+                    var handle = $this.data('handle');
+                    var categoryData = $this.parent('td').parent('tr').data('json');
+                    if(handle === 'edit'){
+                        self._editCategory(null, categoryData);
+                    }else{
+                        console.log('点击按钮不存在');
+                    }
+                });
+            },
+
+            //编辑框加载函数
+            _editCategory: function(e, category){
+                var self = this;
+                category = (typeof category === 'object' && category !== null)?category:{};
+                var html = template(self._options.editCategoryTplId, {
+                    categorys: self.commonPage.data.categorys,
+                    category: category
+                });
+                self.commonPage.showContentAreaMark(html, function(){
+                    self._addEditTemplateEven();
+                });
+            },
+            //绑定编辑框的事件
+            _addEditTemplateEven: function(){
+                var self = this;
+
+                //添加图片事件
+                var thumbCn = self._options.thumbCnSelector;
+                self.commonPage.createFileUpload({
+                    dnd: thumbCn,
+                    init: {
+                        imgUrl: $(thumbCn).data('img')
+                    }
+                }, {
+                    uploadSuccess: function(file, res){
+                        if(res.errno === 0){
+                            var src = res.data[0];
+                            $(self._options.thumbCnInputSelector).val(src);
+                        }
+                    }
+                });
+
+                var thumbEn = self._options.thumbEnSelector;
+                self.commonPage.createFileUpload({
+                    dnd: thumbEn,
+                    init: {
+                        imgUrl: $(thumbEn).data('img')
+                    }
+                }, {
+                    uploadSuccess: function(file, res){
+                        if(res.errno === 0){
+                            var src = res.data[0];
+                            $(self._options.thumbEnInputSelector).val(src);
+                        }
+                    }
+                });
+
+                //提交事件
+                self.commonPage.$rightObj.find(self._options.editFormSelector).off('submit').on('submit', function(e){
+                    e.preventDefault();
+                    var $this = $(this);
+                    var data = self.commonPage.serializeFormObject($this);
+                    if(parseInt(data.id) <= 0){
+                        swal({
+                            title: '页面出错',
+                            text: '数据不完整，请刷新重试',
+                            type: 'error'
+                        });
+                        return;
+                    }
+                    if(data.name_cn === '' && data.name_en === ''){
+                        swal({
+                            title: '栏目名称填写出错',
+                            text: '中文、英文至少填写一项',
+                            type: 'error'
+                        });
+                        return;
+                    }
+                    self.server.saveCategory(data, function(res){
+                        if(res.status === 1){
+                            swal({
+                                title: res.message,
+                                text: '保存成功',
+                                type: 'success',
+                                timer: 1000
+                            },function(){
+                                window.history.go(0);
+                            });
+                        }else{
+                            swal({
+                                title: res.message,
+                                text: '保存失败，请检查后再保存',
+                                type: 'error',
+                                timer: 1000
+                            });
+                        }
+                    });
+                });
+                
+                 //关闭事件
+                self.commonPage.$rightObj.find(self._options.editFormCloseSelector).off('click').on('click', function(){
+                    swal({
+                        title : "关闭栏目编辑框",
+                        text : "信息将丢失，是否继续",
+                        type : "warning",
+                        showCancelButton : true,
+                        confirmButtonColor : '#f8bb86',
+                        confirmButtonText : '继续关闭',
+                        cancelButtonText : "取消",
+                        closeOnConfirm : true
+                    },function(status){
+                        if(status){
+                            self.commonPage.hideContentAreaMark(function(){
+                                console.log('编辑框被关闭');
+                            });
+                        }
+                    });
+                });
+            },
+            
+            _initEnd: function(){
+                
+            },
+
+            init: function(){
+                var self = this;
+                self._initData();
+                self._initEven();
+                self._initEnd();
+                console.log('categorysTpl模板启动中');
+            }
+        }
+    }    
+}else{
+    console.log('加载tpl必须在commonPage加载完毕后加载');
+}  
+</script>

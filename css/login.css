@@ -1,0 +1,74 @@
+/* 多行省略 */
+/* 清除浮动 */
+.container .login-form {
+  font-size: 1.6rem;
+  width: 20em;
+  background: #ffffff;
+  height: 15em;
+  line-height: 2em;
+  border-radius: 0.5em;
+  padding: 1em 2em;
+  margin: 10vh auto 0 auto;
+}
+.container .login-form form {
+  width: 100%;
+  height: 100%;
+}
+.container .login-form form > div {
+  width: 100%;
+}
+.container .login-form form > div.title {
+  text-align: center;
+  font-size: 2rem;
+  line-height: 2.5em;
+}
+.container .login-form form > div.input-area {
+  line-height: 2.5em;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  padding: 0.2em 0;
+  margin-bottom: 0.5em;
+  color: #333333;
+}
+.container .login-form form > div.input-area > i {
+  display: block;
+  text-align: center;
+  width: 2em;
+  cursor: pointer;
+}
+.container .login-form form > div.input-area > input {
+  font-size: inherit;
+  line-height: 1.3em;
+  padding: 0.3em 0.5em;
+  display: block;
+  outline: none;
+  border: 1px solid #aaaaaa;
+  border-radius: 0.2rem;
+  flex-grow: 1;
+  color: inherit;
+}
+.container .login-form form > div.handle-bar {
+  text-align: center;
+  height: 4em;
+  padding: 1em 0;
+}
+.container .login-form form > div.handle-bar > button {
+  border: 1px solid #aaaaaa;
+  background: none;
+  line-height: 2.5em;
+  padding: 0 1.5em;
+  width: 40%;
+  letter-spacing: 1px;
+  border-radius: 0.2rem;
+  margin-right: 1.5em;
+  color: #333333;
+  outline: none;
+  cursor: pointer;
+}
+.container .login-form form > div.handle-bar > button:last-child {
+  margin-right: 0;
+  color: #ffffff;
+  border-color: #4395ff;
+  background-color: #4395ff;
+}

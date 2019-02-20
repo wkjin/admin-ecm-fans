@@ -1,0 +1,468 @@
+<div class="content-products-container"></div>
+<div class="handle-bar">
+    <button><i class="fa fa-plus"></i></button>
+</div>
+<!-- 编辑产品 -->
+<script type="text/html" id="edit-product-tpl">
+    <div class="product-edit-form-area">
+        <form action="" id="content-edit-form-area">
+            <h2 class="text-center">产品信息编辑</h2>
+            <div class="content-edit-tip">温馨提醒：中英文相同，可以只是填写其中之一</div>
+            <div class="form-content-area">
+                <div class="base-info">
+                    <input type="hidden" name="id" value="{{product.id}}"><!--产品的id-->
+                    <div>
+                        <h4>所属栏目</h4>
+                        <div class="handle-area">
+                            <select name="category_id" required>
+                                <option value="">请选择栏目</option>
+                                {{each categorys it i}}
+                                <option value="{{it.id}}" {{if it.id == product.category_id }}selected{{/if}} >{{it.name_cn}}（{{it.name_en}}）</option>
+                                {{/each}}
+                            </select>    
+                        </div>
+                    </div>
+                    <div>
+                        <h4>标题</h4>
+                        <div class="handle-area">
+                            <input type="text" name="title_cn" value="{{product.title_cn}}" placeholder="请输入中文标题"><br/>
+                            <input type="text" name="title_en" value="{{product.title_en}}" placeholder="请输入英文标题"> 
+                        </div>
+                    </div>
+                    <div>
+                        <h4>缩略图</h4>
+                        <div class="handle-area">
+                            <div class="left">
+                                <h6>中文</h6>
+                                <div data-img="{{product.thumb_cn}}" id="product-thumb-cn"></div>  
+                            </div>
+                            <div class="right">
+                                <h6>英文</h6>
+                                <div data-img="{{product.thumb_en}}" id="product-thumb-en"></div>
+                            </div>
+                            <input type="hidden" name="thumb_cn" value="{{product.thumb_cn}}">
+                            <input type="hidden" name="thumb_en" value="{{product.thumb_en}}">
+                        </div>
+                    </div>
+                    <div>
+                        <h4>文章状态</h4>
+                        <div class="handle-area"> 
+                            排序（升序排序）
+                            <input type="number" name="sort" value="{{product.sort?product.sort:1}}" min="0" max="999">
+                        </div>
+                        <div class="handle-area"> 
+                            是否启用：
+                            <label for="status-1">启用</label><input type="radio" id="status-1" name="status" value="1" {{if product.status == 1 }}checked{{/if}} required>
+                            <label for="status-0">停用</label><input type="radio" name="status" value="0" id="status-0" {{if product.status == 0 }}checked{{/if}}>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h4>产品信息</h4>
+                        <div class="handle-area">
+                            <label for="impeller_diameter">叶轮直径</label>
+                            <select name="impeller_diameter" id="impeller_diameter" required>
+                                {{each  impellerDiameterArr it i}}
+                                <option value="{{it.name}}" {{if it.name == product.impeller_diameter }}selected{{/if}} >{{it.value}}</option>
+                                {{/each}}
+                            </select>  
+                        </div>
+                        <div class="handle-area">  
+                            <label for="air_volume">风量[m³/h]</label>
+                            <select name="air_volume" id="air_volume" required>
+                                {{each  airVolumeArr it i}}
+                                <option value="{{it.name}}" {{if it.name == product.air_volume }}selected{{/if}} >{{it.value}}</option>
+                                {{/each}}
+                            </select>  
+                        </div>
+                        <div class="handle-area">
+                            <label for="power_category">电源类别</label>
+                            <select name="power_category" id="power_category" required>
+                                {{each  powerCategoryArr it i}}
+                                <option value="{{it.name}}" {{if it.name == product.power_category }}selected{{/if}} >{{it.value}}</option>
+                                {{/each}}
+                            </select>  
+                        </div>
+                        <div class="handle-area">
+                            <label for="voltage">电压[V]</label>
+                            <select name="voltage" id="voltage" required>
+                                {{each  voltageArr it i}}
+                                <option value="{{it.name}}" {{if it.name == product.voltage }}selected{{/if}} >{{it.value}}</option>
+                                {{/each}}
+                            </select>  
+                        </div>
+                        <div class="handle-area">
+                            <label for="frequency">频率[Hz]</label>
+                            <select name="frequency" id="frequency" required>
+                                {{each  frequencyArr it i}}
+                                <option value="{{it.name}}" {{if it.name == product.frequency }}selected{{/if}} >{{it.value}}</option>
+                                {{/each}}
+                            </select>  
+                        </div>
+                        <div class="handle-area">
+                            <label for="atmospheric_pressure">大气压[Pa]</label>
+                            <select name="atmospheric_pressure" id="atmospheric_pressure">
+                                {{each  atmosphericPressureArr it i}}
+                                <option value="{{it.name}}" {{if it.name == product.atmospheric_pressure }}selected{{/if}} >{{it.value}}</option>
+                                {{/each}}
+                            </select>  
+                        </div>
+                        <div class="handle-area">
+                            <label for="speed">转速[min-1]</label>
+                            <select name="speed" id="speed">
+                                {{each  speedArr it i}}
+                                <option value="{{it.name}}" {{if it.name == product.speed }}selected{{/if}} >{{it.value}}</option>
+                                {{/each}}
+                            </select>  
+                        </div>
+                        <div class="handle-area">
+                            <label for="phase_number">相数</label>
+                            <select name="phase_number" id="phase_number">
+                                {{each  phaseNumberArr it i}}
+                                <option value="{{it.name}}" {{if it.name == product.phase_number }}selected{{/if}} >{{it.value}}</option>
+                                {{/each}}
+                            </select>  
+                        </div>
+                        <div class="handle-area">
+                            <label for="specifications">规格</label>
+                            <select name="specifications" id="specifications">
+                                {{each specificationsArr it i}}
+                                <option value="{{it.name}}" {{if it.name == product.specifications }}selected{{/if}} >{{it.value}}</option>
+                                {{/each}}
+                            </select>  
+                        </div>
+                    </div>   
+                </div>
+                <div class="additional-info">
+                        <div>
+                        <h4>内容</h4>
+                        <div class="handle-area">
+                            <div>
+                                <h6>中文内容</h6>
+                                <div id="product-content-cn" >
+                                    {{#(product.content_cn?product.content_cn:'')}}
+                                </div>
+                                <input type="hidden" name="content_cn" value="{{product.content_cn}}" id="product-content-cn-input">
+                            </div>
+                            <div>
+                                <h6>英文内容</h6>
+                                <div id="product-content-en" >
+                                    {{#(product.content_en?product.content_en:'')}}
+                                </div>
+                                <input type="hidden" name="content_en" value="{{product.content_en}}" id="product-content-en-input">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div class="form-handle-bar">
+                <button class="js-edit-form-close" type="button"><i class="fa fa-close"></i> 关闭</button>
+                <button class="submit" type="submit"><i class="fa fa-save"></i> 保存</button>
+            </div>
+        </form>
+    </div>
+</script>
+
+<script type="text/html" id="products-tpl">
+    <table>
+        <tr>
+            <th>所属栏目</th>
+            <th>标题（中）</th>
+            <th>标题（英）</th>
+            <th>缩略图（中）</th>
+            <th>缩略图（英）</th>
+            <th>排序</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        {{each listData it i}}
+        <tr data-json="{{it}}">
+            <td>{{it.c_name_cn}}<br>{{it.c_name_en}}</td>
+            <td>{{it.title_cn}}</td>
+            <td>{{it.title_en}}</td>
+            <td><img src="{{it.thumb_cn}}"></td>
+            <td><img src="{{it.thumb_en}}"></td>
+            <td>{{it.sort}}</td>
+            <td>{{if it.status === '1'}}启用{{else}}停用{{/if}}</td>
+            <td>
+                <button data-handle="edit"><i class="fa fa-edit"></i></button>
+                <button data-handle="remove"><i class="fa fa-remove"></i></button>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+</script>
+
+<script>
+if(typeof commonPage === 'object'){
+    if(typeof commonPage.productsTplObj !== 'object'){
+        commonPage.productsTplObj = {
+            _options: {
+                tplContainerSelector: '.content-products-container',//模板容器的选择器
+                tplId: 'products-tpl',//模板id
+                addButtonSelector: '.handle-bar button',//添加按钮的选择器
+                editProductTplId: 'edit-product-tpl',//编辑产品的模板id
+                editFormSelector: '#content-edit-form-area',//编辑表单的选择器
+                editFormCloseSelector: '.js-edit-form-close',//编辑form关闭选择器
+
+                //富文本编辑器
+                contentCnEditorSelector: '#product-content-cn',//中文内容的富文本编辑器的选择器
+                contentCnEditorName: 'contentCnEditor',//中文内容富文本编辑器的名字
+                contentEnEditorSelector: '#product-content-en',//英文内容的富文本编辑器的选择器
+                contentEnEditorName: 'contentEnEditor',//英文内容富文本编辑器的名字
+
+                //缩略图
+                thumbCnSelector: '#product-thumb-cn',//中文缩略图
+                thumbCnInputSelector: 'input[name=thumb_cn]',
+                thumbEnSelector: '#product-thumb-en',//引文缩略图
+                thumbEnInputSelector: 'input[name=thumb_en]',
+                
+                
+            },
+
+            $tpl: null,//模板容器
+            commonPage: null,
+            server: null,
+
+            _initData: function(){
+                var self = this;
+                
+                self.$tpl = $(self._options.tplContainerSelector);
+
+                //注入对象
+                self.commonPage = commonPage;
+                self.server = commonPage.server;
+                
+                //获取数据并填充
+                self.server.getProductsList({
+                    pageSize: 100  
+                },function(res){
+                    if(res.status === 1){
+                        var html = template(self._options.tplId, {
+                            listData: res.data
+                        });
+                        self.$tpl.html(html);
+                    }else{
+                        swal({
+                            title: '获取信息失败',
+                            text: res.message,
+                            type: 'error'
+                        }, function(){
+                            window.history.go(0);
+                        });
+                    }
+                });
+                
+            },
+
+            _initEven: function(){
+                var self = this;
+                //绑定产品编辑事件
+                self.commonPage.$rightObj.find(self._options.addButtonSelector).off('click').on('click', function(e, product){
+                    product = (typeof product === 'object' && product !== null)?product:{};
+                    var html = template(self._options.editProductTplId, {
+                        product: product,
+                        categorys: self.commonPage.data.categorys,
+                        impellerDiameterArr: self.commonPage.splitFragment('impeller_diameter'),
+                        airVolumeArr: self.commonPage.splitFragment('air_volume'),
+                        powerCategoryArr: self.commonPage.splitFragment('power_category'),
+                        voltageArr: self.commonPage.splitFragment('voltage'),
+                        frequencyArr: self.commonPage.splitFragment('frequency'),
+                        atmosphericPressureArr: self.commonPage.splitFragment('atmospheric_pressure'),
+                        speedArr: self.commonPage.splitFragment('speed'),
+                        phaseNumberArr: self.commonPage.splitFragment('phase_number'),
+                        specificationsArr: self.commonPage.splitFragment('specifications') 
+                    });
+                    self.commonPage.showContentAreaMark(html, function(){
+                        self._addEditTemplateEven();
+                    });
+
+                });
+                
+                //绑定产品编辑事件
+                self.commonPage.$rightObj.find(self._options.tplContainerSelector).on('click', 'button', function(e){
+                    var $this = $(this);
+                    var handle = $this.data('handle');
+                    var productData = $this.parent('td').parent('tr').data('json');
+                    if(handle === 'edit'){
+                        self.commonPage.$rightObj.find(self._options.addButtonSelector).trigger('click', productData);
+                    }else if('remove'){
+                        swal({
+                            title : "删除提醒",
+                            text : "确定删除“" + (productData.title_cn?productData.title_cn: productData.title_en) + "”",
+                            type : "warning",
+                            showCancelButton : true,
+                            confirmButtonColor : '#DD6B55',
+                            confirmButtonText : '删除',
+                            cancelButtonText : "取消",
+                            closeOnConfirm : true
+                        },function(status){
+                            if(status){
+                                self.server.removeProduct(productData.id, function(res){
+                                    if(res.status === 1){
+                                        swal({
+                                            title: '删除提醒',
+                                            text: res.message,
+                                            type: 'success',
+                                            timer: 1000
+                                        }, function(){
+                                            window.history.go(0);  
+                                        });
+                                    }else{
+                                        swal({
+                                            title: '删除错误提醒',
+                                            text: res.message,
+                                            type: 'error'
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }else{
+                        console.log('unknow button');
+                    }
+                });
+            
+            },
+
+            //给edit模板添加事件
+            _addEditTemplateEven: function(){
+                var self = this;
+                //对template绑定事件
+                
+                //初始化富文本编辑器
+                self[self._options.contentCnEditorName] = self.commonPage.createEditor(self._options.contentCnEditorSelector);
+                self[self._options.contentEnEditorName] = self.commonPage.createEditor(self._options.contentEnEditorSelector);
+
+                //添加图片事件
+                var thumbCn = self._options.thumbCnSelector;
+                self.commonPage.createFileUpload({
+                    dnd: thumbCn,
+                    init: {
+                        imgUrl: $(thumbCn).data('img')
+                    }
+                }, {
+                    uploadSuccess: function(file, res){
+                        if(res.errno === 0){
+                            var src = res.data[0];
+                            $(self._options.thumbCnInputSelector).val(src);
+                        }
+                    }
+                });
+
+                var thumbEn = self._options.thumbEnSelector;
+                self.commonPage.createFileUpload({
+                    dnd: thumbEn,
+                    init: {
+                        imgUrl: $(thumbEn).data('img')
+                    }
+                }, {
+                    uploadSuccess: function(file, res){
+                        if(res.errno === 0){
+                            var src = res.data[0];
+                            $(self._options.thumbEnInputSelector).val(src);
+                        }
+                    }
+                });
+
+                //提交事件
+                self.commonPage.$rightObj.find(self._options.editFormSelector).off('submit').on('submit', function(e){
+                    e.preventDefault();
+                    var $this = $(this);
+                    var data = self.commonPage.serializeFormObject($this);
+                    //标题验证
+                    if(data.title_cn === '' && data.title_en === ''){
+                        swal({
+                            title: '标题填写错误',
+                            text: '中文、英文至少填写一项',
+                            type: 'error'
+                        }, function(){
+                            setTimeout(function(){
+                                $this.find('input[name=name_cn]').focus();
+                            }, 0);
+                        });
+                        return;
+                    }
+                    //缩略图验证
+                    if(data.thumb_cn === '' && data.thumb_en === ''){
+                        swal({
+                            title: '缩略图没有上传',
+                            text: '中文、英文至少至少上传一个',
+                            type: 'error'
+                        });
+                        return;
+                    }
+                    data.sort = parseInt(data.sort);
+                    if(data.sort < 0 || data.sort > 999){
+                        swal({
+                            title: '排序填写错误',
+                            text: '0排序最低，999排序最高',
+                            type: 'error'
+                        });
+                        return;
+                    }
+                    if(data.content_cn === '' && data.content_en === ''){
+                        swal({
+                            title: '内容填写错误',
+                            text: '中文、英文至少填写一项',
+                            type: 'error'
+                        });
+                        return;
+                    }
+                    self.server.saveProduct(data, function(res){
+                        if(res.status === 1){
+                            swal({
+                                title: res.message,
+                                text: '保存成功',
+                                type: 'success',
+                                timer: 1000
+                            },function(){
+                                window.history.go(0);
+                            });
+                        }else{
+                            swal({
+                                title: res.message,
+                                text: '保存失败，请检查后再保存',
+                                type: 'error',
+                                timer: 1000
+                            });
+                        }
+                    });
+                });
+                //关闭事件
+                self.commonPage.$rightObj.find(self._options.editFormCloseSelector).off('click').on('click', function(){
+                    swal({
+                        title : "关闭产品编辑框",
+                        text : "信息将丢失，是否继续",
+                        type : "warning",
+                        showCancelButton : true,
+                        confirmButtonColor : '#f8bb86',
+                        confirmButtonText : '继续关闭',
+                        cancelButtonText : "取消",
+                        closeOnConfirm : true
+                    },function(status){
+                        if(status){
+                            self.commonPage.hideContentAreaMark(function(){
+                                console.log('编辑框被关闭');
+                            });
+                        }
+                    });
+                });
+            },
+
+            _initEnd: function(){
+                var self = this;
+            },
+
+            init: function(){
+                var self = this;
+                self._initData();
+                self._initEven();
+                self._initEnd();
+                console.log('products模板启动中');
+            }
+        }
+    }    
+}else{
+    console.log('加载tpl必须在commonPage加载完毕后加载');
+}  
+</script>

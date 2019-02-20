@@ -1,0 +1,746 @@
+/**
+    @function: 批量定义样式已经头部与尾部页面
+    @author: wkj
+    @time: 2019.1.17
+*/
+/* 多行省略 */
+/* 清除浮动 */
+html,
+body,
+div,
+h1,
+h2,
+h2,
+h4,
+h5,
+h6,
+span,
+ul,
+li,
+p,
+footer,
+header,
+img,
+a,
+input,
+table,
+td,
+th,
+td,
+tr,
+button {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Microsoft Yahei UI", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, SimSun, SimHei, "宋体", simsun, sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #333333;
+  background-color: transparent;
+}
+.bottom-loadding {
+  display: none;
+  width: 100%;
+  height: 2em;
+  margin-top: 1em;
+  text-align: center;
+  line-height: 2em;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  color: #aaaaaa;
+}
+img {
+  border-width: 0;
+  user-drag: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+select,
+input:not([type=radio]),
+textarea {
+  font-size: inherit;
+  border: 1px solid #cccccc;
+  padding: 0.4em 0.4em;
+  line-height: 1em;
+  border-radius: 0.2em;
+  width: 100%;
+  margin-bottom: 0.2em;
+  font-size: 1.3rem;
+  height: calc(1.8em + 2px);
+  color: #666666;
+}
+textarea {
+  height: auto;
+  line-height: 1.5em;
+  color: #333333;
+}
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+input[type=number] {
+  width: 5em;
+  text-align: center;
+}
+input[type=color] {
+  padding: 0;
+}
+input[type=radio] {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  margin: 0 0.5em;
+  font-size: 1.5em;
+  color: #666666;
+  cursor: pointer;
+}
+html {
+  font-size: 10px;
+}
+body {
+  background-color: #ffffff;
+  overflow: hidden;
+  font-size: 1.4rem;
+}
+/* 自定义滚动条的样式 */
+::-webkit-scrollbar {
+  width: 0.6em;
+  height: 0.6em;
+}
+.hide {
+  display: none;
+}
+.text-center {
+  text-align: center;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 0.25em rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 0.25em rgba(197, 227, 241, 0.3);
+  background: #c5e3f1;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #dddddd;
+  border-radius: 2px;
+  background-color: #ffffff;
+  color: #333333;
+  font-size: 1.2rem;
+}
+table tr td,
+table tr th {
+  border: 1px solid #dddddd;
+  vertical-align: middle;
+  overflow: hidden;
+  padding: 10px 10px;
+}
+table tr td img,
+table tr th img {
+  max-width: 10em;
+  max-height: 5em;
+  position: relative;
+  display: block;
+  top: 50%;
+  transform: translateY(0%);
+  margin: 0 auto;
+  cursor: pointer;
+}
+table tr td button,
+table tr th button {
+  outline: none;
+  line-height: 2em;
+  padding: 0 0.8em;
+  border: 1px solid #cccccc;
+  border-radius: 0.2em;
+  background: transparent;
+  cursor: pointer;
+}
+table tr td button i,
+table tr th button i {
+  width: 1em;
+  text-align: center;
+}
+table tr th {
+  line-height: 3em;
+  letter-spacing: 1px;
+}
+div .w-e-toolbar {
+  flex-wrap: wrap;
+  -webkit-box-lines: multiple;
+  z-index: 9998;
+}
+div .w-e-toolbar .w-e-menu {
+  z-index: 9997!important;
+}
+div .w-e-toolbar .w-e-menu:hover {
+  z-index: 10002!important;
+}
+div .w-e-toolbar .w-e-menu a {
+  text-decoration: none;
+}
+div .w-e-text-container {
+  z-index: 9997!important;
+}
+div .fullscreen-editor {
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0px !important;
+  top: 0px !important;
+  background-color: white;
+  z-index: 9999;
+}
+div .fullscreen-editor .w-e-text-container {
+  width: 100% !important;
+  height: 95% !important;
+}
+.container {
+  min-width: 1200px;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: #c5e3f1 !important;
+}
+.container > div {
+  overflow: hidden;
+}
+.container > div.left-side {
+  font-size: 1.6rem;
+  width: 12em;
+  height: 100%;
+}
+.container > div.left-side > div.logo-area {
+  width: 100%;
+  height: 4em;
+  overflow: hidden;
+  cursor: pointer;
+}
+.container > div.left-side > div.logo-area > img {
+  width: 100%;
+  display: block;
+  position: relative;
+  height: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.container > div.left-side > div.nav-area {
+  font-size: 1.6rem;
+  padding: 1em;
+}
+.container > div.left-side > div.nav-area > ul {
+  display: block;
+  width: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.container > div.left-side > div.nav-area > ul > li {
+  text-align: center;
+  line-height: 2.5em;
+  display: block;
+  margin: 1em 0;
+  cursor: pointer;
+  border-radius: 0.2em;
+  color: #333333;
+  box-shadow: 1px 1px 1px 1px #aaaaaa;
+  transition: box-shadow 0.2s;
+  position: relative;
+}
+.container > div.left-side > div.nav-area > ul > li > i {
+  width: 1.5em;
+  text-align: center;
+  padding-right: 0.5em;
+}
+.container > div.left-side > div.nav-area > ul > li:hover {
+  color: #4395ff;
+}
+.container > div.left-side > div.nav-area > ul > li.nav-active {
+  color: #4395ff;
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+}
+.container > div.left-side > div.nav-area > ul > li.nav-active::after {
+  content: "\f105";
+  display: block;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 1em;
+  height: 2em;
+  text-align: center;
+  font-family: FontAwesome;
+  transform-origin: 50% 50%;
+  transform: scale(0.8);
+}
+.container > div.right-side {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+  font-size: 1.4rem;
+  position: relative;
+}
+.container > div.right-side > div.right-header {
+  height: 3em;
+  line-height: 3em;
+  overflow: hidden;
+  padding: 0 1em;
+  text-align: right;
+}
+.container > div.right-side > div.right-header::after {
+  content: '';
+  width: 0;
+  height: 0;
+  display: block;
+  clear: both;
+}
+.container > div.right-side > div.right-header > div {
+  display: inline-block;
+  margin-left: 1em;
+}
+.container > div.right-side > div.right-header > div.user-info {
+  font-size: 1.2rem;
+  color: #666666;
+}
+.container > div.right-side > div.right-header > div.setting-area {
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+.container > div.right-side > div.right-header > div.setting-area > a {
+  color: #333333;
+}
+.container > div.right-side > div.right-content-area {
+  height: calc(100% - 4.5em);
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.5em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #ffffff;
+  padding: 0.5em;
+}
+.container > div.right-side > div.right-content-area > div {
+  padding-bottom: 2em;
+  /* 首页 */
+}
+.container > div.right-side > div.right-content-area > div.content-index-container .right-content-index {
+  font-size: 1.6rem;
+  line-height: 2em;
+  color: #333333;
+}
+.container > div.right-side > div.right-content-area > div.content-index-container .right-content-index > h2 {
+  line-height: 2.5em;
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area > div.content-index-container .right-content-index > p {
+  text-indent: 2em;
+}
+.container > div.right-side > div.right-content-area > div.content-index-container .right-content-index > p::before {
+  content: "\f18e　";
+  display: inline;
+  font-family: FontAwesome;
+}
+.container > div.right-side > div.right-content-area > div.content-categorys-container table tr.layer0 {
+  color: #000000;
+  background-color: #eeeeee;
+}
+.container > div.right-side > div.right-content-area > div.content-categorys-container table tr.layer1 {
+  opacity: 0.8;
+}
+.container > div.right-side > div.right-content-area > div.content-categorys-container table tr td:nth-child(3),
+.container > div.right-side > div.right-content-area > div.content-categorys-container table tr td:last-child,
+.container > div.right-side > div.right-content-area > div.content-categorys-container table tr td:nth-last-child(2) {
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area > div.content-fragments-container table tr td:last-child,
+.container > div.right-side > div.right-content-area > div.content-fragments-container table tr td:nth-last-child(2) {
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area > div.content-fragments-container table tr td:nth-last-child(2) {
+  width: 4em;
+}
+.container > div.right-side > div.right-content-area > div.content-fragments-container table tr td:last-child {
+  width: 4em;
+}
+.container > div.right-side > div.right-content-area > div.content-articles-container table tr td:first-child {
+  width: 15em;
+  overflow: hidden;
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area > div.content-articles-container table tr td:last-child,
+.container > div.right-side > div.right-content-area > div.content-articles-container table tr td:nth-last-child(2),
+.container > div.right-side > div.right-content-area > div.content-articles-container table tr td:nth-last-child(3) {
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area > div.content-articles-container table tr td:nth-last-child(2),
+.container > div.right-side > div.right-content-area > div.content-articles-container table tr td:nth-last-child(3) {
+  width: 4em;
+}
+.container > div.right-side > div.right-content-area > div.content-articles-container table tr td:last-child {
+  width: 8em;
+}
+.container > div.right-side > div.right-content-area > div.content-products-container table tr td:first-child {
+  width: 15em;
+  overflow: hidden;
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area > div.content-products-container table tr td:last-child,
+.container > div.right-side > div.right-content-area > div.content-products-container table tr td:nth-last-child(2),
+.container > div.right-side > div.right-content-area > div.content-products-container table tr td:nth-last-child(3) {
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area > div.content-products-container table tr td:nth-last-child(2),
+.container > div.right-side > div.right-content-area > div.content-products-container table tr td:nth-last-child(3) {
+  width: 4em;
+}
+.container > div.right-side > div.right-content-area > div.content-products-container table tr td:last-child {
+  width: 8em;
+}
+.container > div.right-side > div.right-content-area > div.handle-bar {
+  position: absolute;
+  z-index: 2;
+  top: calc(3em + 10px);
+  right: 20px;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  background: #c5e3f1;
+  text-align: center;
+  line-height: 3em;
+  overflow: hidden;
+}
+.container > div.right-side > div.right-content-area > div.handle-bar > button {
+  width: 2.8em;
+  line-height: 2.8em;
+  border-radius: 50%;
+  border: none;
+  color: #ffffff;
+  background-color: #4395ff;
+  cursor: pointer;
+  outline: none;
+  font-weight: lighter;
+}
+.container > div.right-side > div.right-content-area-mask {
+  height: calc(100% - 4.5em);
+  width: 100%;
+  position: absolute;
+  /* background-color: rgba(0, 0, 0, 0.6); */
+  background-color: #ffffff;
+  border-radius: 0.5em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  z-index: 100;
+  top: 3em;
+  padding: 0.5em;
+  display: none;
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.content-edit-tip,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.content-edit-tip {
+  text-align: center;
+  background: #fcf8e3;
+  color: #888888;
+  font-size: 1.2rem;
+  line-height: 2.5em;
+  border-radius: 0.2em;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-grow: wrap;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.left-area,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.left-area,
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area {
+  background: #fafafa;
+  width: 400px;
+  padding: 1em;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.left-area > div,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.left-area > div,
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div {
+  padding: 0.5em 0;
+  color: #333333;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.left-area > div h4,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.left-area > div h4,
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div h4,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div h4 {
+  line-height: 1em;
+  font-size: 1.8rem;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.left-area > div > div,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.left-area > div > div,
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div > div,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div > div {
+  padding: 0.5em 2em;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.left-area > div > div h6,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.left-area > div > div h6,
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div > div h6,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div > div h6 {
+  font-size: 1.4rem;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area {
+  width: 700px;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div.key-values:after,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div.key-values:after {
+  content: '';
+  width: 0;
+  height: 0;
+  display: block;
+  clear: both;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div {
+  float: left;
+  width: 50%;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div h6,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div h6 {
+  color: #666666;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div {
+  display: flex;
+  width: 100%;
+  padding: 0.3em 0;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div > span,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div > span,
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div > input,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div > input {
+  display: block;
+  flex-grow: 1;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div i,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div i {
+  color: #666666;
+  font-weight: lighter;
+  display: block;
+  width: 2em;
+  text-align: center;
+  cursor: pointer;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div button,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div button {
+  display: inline-block;
+  padding: 0.2em 1em;
+  border: 0;
+  line-height: 2em;
+  border-radius: 0.2em;
+  margin: 1em;
+  outline: none;
+  cursor: pointer;
+  color: #666666;
+  background-color: #eeeeee;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div button i,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-content-area > div.right-area > div.key-values > div div > div button i {
+  color: inherit;
+  display: inline;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-handle-bar,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-handle-bar {
+  padding: 1em 1em 3em 1em;
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-handle-bar button,
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-handle-bar button {
+  margin: 0.5em 2em;
+  padding: 0.5em 2.5em;
+  line-height: 1.5em;
+  border-radius: 0.2em;
+  background: transparent;
+  border: 1px solid #aaaaaa;
+  color: #333333;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.container > div.right-side > div.right-content-area-mask > div.category-edit-form-area form > div.form-handle-bar button[type=submit],
+.container > div.right-side > div.right-content-area-mask > div.fragment-edit-form-area form > div.form-handle-bar button[type=submit] {
+  color: #ffffff;
+  border-color: #4395ff;
+  background: #4395ff;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area {
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: relative;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.content-edit-tip,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.content-edit-tip {
+  text-align: center;
+  background: #fcf8e3;
+  color: #888888;
+  font-size: 1.2rem;
+  line-height: 2.5em;
+  border-radius: 0.2em;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area:after,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area:after {
+  content: '';
+  width: 0;
+  height: 0;
+  display: block;
+  clear: both;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div {
+  float: left;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info {
+  width: 25em;
+  padding: 0 1.5em 0 0.5em;
+  border-right: 1px dotted #eeeeee;
+  font-size: 1.4rem;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info > div > h4,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info > div > h4 {
+  line-height: 2.5em;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333333;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info > div .handle-area,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info > div .handle-area {
+  line-height: 2.5em;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info > div .handle-area .left,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info > div .handle-area .left,
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info > div .handle-area .right,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info > div .handle-area .right {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info > div .handle-area .left h6,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info > div .handle-area .left h6,
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info > div .handle-area .right h6,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info > div .handle-area .right h6 {
+  line-height: 2em;
+  font-size: 1.2rem;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info > div.product-info .handle-area,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info > div.product-info .handle-area {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info > div.product-info .handle-area > label,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info > div.product-info .handle-area > label {
+  width: 8em;
+  display: block;
+  text-align: right;
+  padding-right: 0.5em;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.base-info > div.product-info .handle-area > select,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.base-info > div.product-info .handle-area > select {
+  display: block;
+  flex-grow: 1;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.additional-info,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.additional-info {
+  width: calc(100% - 25em);
+  padding: 0 1.5em;
+  flex-grow: 1;
+  line-height: 2em;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-content-area > div.additional-info h4,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-content-area > div.additional-info h4 {
+  line-height: 2.5em;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333333;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-handle-bar,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-handle-bar {
+  padding: 1em 1em 3em 1em;
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-handle-bar button,
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-handle-bar button {
+  margin: 0.5em 2em;
+  padding: 0.5em 2.5em;
+  line-height: 1.5em;
+  border-radius: 0.2em;
+  background: transparent;
+  border: 1px solid #aaaaaa;
+  color: #333333;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.container > div.right-side > div.right-content-area-mask > div.article-edit-form-area form > div.form-handle-bar button[type=submit],
+.container > div.right-side > div.right-content-area-mask > div.product-edit-form-area form > div.form-handle-bar button[type=submit] {
+  color: #ffffff;
+  border-color: #4395ff;
+  background: #4395ff;
+}
+.container > div.right-side > div.right-footer {
+  line-height: 1.5em;
+  text-align: center;
+  color: #666666;
+}
+.container > div.right-side > div.right-footer > p {
+  font-size: 1.1rem;
+}
+@media screen and (min-width: 1600px) {
+  html {
+    font-size: 13px!important;
+  }
+}
+@media screen and (max-width: 1600px) and (min-width: 1200px) {
+  html {
+    font-size: 12px !important;
+  }
+}
+@media screen and (max-width: 1200px) and (min-width: 1024px) {
+  html {
+    font-size: 11px!important;
+  }
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 10px!important;
+  }
+}
