@@ -45,7 +45,9 @@ if(typeof commonPage === 'object'){
             },
 
             _initEnd: function(callback){
+                console.log('debug---------->>>', callback);
                 if(typeof callback === 'function'){
+                    
                     callback();
                 }
             },
