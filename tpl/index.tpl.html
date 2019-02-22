@@ -37,7 +37,6 @@ if(typeof commonPage === 'object'){
                     ]
                 });
                 self.$tpl.html(html);
-                
             },
 
             _initEven: function(){
@@ -54,9 +53,9 @@ if(typeof commonPage === 'object'){
 
             init: function(options, callback){
                 var self = this;
+                console.log('========>> debug ', callback);
                 self._initData();
                 self._initEven();
-                console.log('========>> debug ', callback);
                 self._initEnd(callback);
                 console.log('index模板启动中');
             }
