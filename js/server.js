@@ -151,6 +151,9 @@ var server = {
             url: self._options.host + requestObj.url,
             type: type,
             crossDomain: true,
+            beforeSend: function(){
+                $.showLoading();//显示加载数据
+            },
             xhrFields:{
                 withCredentials: true
             },//携带身份验证
@@ -158,6 +161,9 @@ var server = {
                 if(typeof requestObj.callback === 'function'){
                     requestObj.callback(data);
                 }
+            },
+            complete: function(){
+                $.hideLoading();//隐藏加载数据 
             },
             error: function(XMLHttpRequest){
                 console.log('网络错误！！！！');
