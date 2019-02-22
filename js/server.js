@@ -33,6 +33,8 @@ var server = {
         fileUploadServer: 'File/fileUpload'
     },
     _isHasInit: false,//是否初始化
+    _ajaxNum: 0,//发起ajax个数
+
 
     //初始化数据
     initData: function(){
@@ -151,9 +153,6 @@ var server = {
             url: self._options.host + requestObj.url,
             type: type,
             crossDomain: true,
-            beforeSend: function(){
-                $.showLoading();//显示加载数据
-            },
             xhrFields:{
                 withCredentials: true
             },//携带身份验证
@@ -162,8 +161,22 @@ var server = {
                     requestObj.callback(data);
                 }
             },
+            beforeSend: function(){
+                var me = server;
+                if(me._ajaxNum > 0){
+                   $.showLoading();//显示加载数据 
+                }else{
+                    me._ajaxNum ++;
+                    setTimeout(function(){
+                        if(me._ajaxNum > 0){
+                            $.showLoading();//显示加载数据 
+                        }
+                    }, 800);
+                }
+            },
             complete: function(){
                 $.hideLoading();//隐藏加载数据 
+                me._ajaxNum --;
             },
             error: function(XMLHttpRequest){
                 console.log('网络错误！！！！');
