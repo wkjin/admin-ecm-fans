@@ -186,13 +186,13 @@ var commonPage = {
                     setTimeout(function(){
                         if(me.isloadNum > 0){
                             $.showLoading();//加载数据
+                        }else{
+                            $.hideLoading();//加载数据
                         }
                     }, 800);
                     self[startTplFuncName].init(null, function(){
-                        setTimeout(function(){
-                            me.isloadNum --;
-                            $.hideLoading();//加载数据
-                        }, 0);
+                        me.isloadNum --;
+                        $.hideLoading();//加载数据
                     });//把tpl中的方法注入到本对象中
                 });
             }
