@@ -186,10 +186,8 @@ var commonPage = {
                         var me = commonPage;
                         if(me.isloadNum > 0){
                             $.showLoading();//加载数据
-                        }else{
-                            $.hideLoading();//加载数据
                         }
-                    }, 800);
+                    }, 500);
                     self[startTplFuncName].init(null, function(){
                         self.isloadNum --;
                         $.hideLoading();//加载数据
