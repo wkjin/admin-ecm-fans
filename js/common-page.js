@@ -181,9 +181,16 @@ var commonPage = {
                 var contentTplHtml = './tpl/' + className + '.tpl.html';
                 var startTplFuncName = className + 'TplObj';
                 self.$rightObj.find(self._options.rightContentContainerSelector).load(contentTplHtml, function(){
-                    $.showLoading();//加载数据
+                    self.isloadNum ++;
+                    var me = commonPage;
+                    setTimeout(function(){
+                        if(me.isloadNum > 0){
+                            $.showLoading();//加载数据
+                        }
+                    }, 800);
                     self[startTplFuncName].init(null, function(){
                         $.hideLoading();//加载数据
+                        self.isloadNum --;
                     });//把tpl中的方法注入到本对象中
                 });
             }
