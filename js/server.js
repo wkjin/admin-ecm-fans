@@ -176,7 +176,7 @@ var server = {
             },
             complete: function(){
                 $.hideLoading();//隐藏加载数据 
-                me._ajaxNum --;
+                self._ajaxNum --;
             },
             error: function(XMLHttpRequest){
                 console.log('网络错误！！！！');
