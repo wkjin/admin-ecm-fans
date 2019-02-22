@@ -193,7 +193,7 @@ var commonPage = {
                             var me = commonPage;
                             me.isloadNum --;
                             $.hideLoading();//加载数据
-                        }, 2000);
+                        }, 1200);
                     });//把tpl中的方法注入到本对象中
                 });
             }
