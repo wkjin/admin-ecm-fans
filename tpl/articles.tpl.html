@@ -361,8 +361,10 @@ if(typeof commonPage === 'object'){
                 });
             },
 
-            _initEnd: function(){
-                
+            _initEnd: function(callback){
+                if(typeof callback === 'function'){
+                    callback(); 
+                }
             },
 
             init: function(options, callback){
