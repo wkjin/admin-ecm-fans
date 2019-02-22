@@ -44,15 +44,17 @@ if(typeof commonPage === 'object'){
                 
             },
 
-            _initEnd: function(){
-                
+            _initEnd: function(callback){
+                if(typeof callback === 'function'){
+                    callback();
+                }
             },
 
-            init: function(){
+            init: function(options, callback){
                 var self = this;
                 self._initData();
                 self._initEven();
-                self._initEnd();
+                self._initEnd(callback);
                 console.log('index模板启动中');
             }
         }

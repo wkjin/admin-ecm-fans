@@ -411,16 +411,19 @@ if(typeof commonPage === 'object'){
                 }
             },
             
-            _initEnd: function(){
+            _initEnd: function(callback){
                 var self = this;
                 /* self._editFragment(null, {"id":"22","key":"air_volume","description":"风量[m³/h]（下拉菜单中每个值以|分割）","value_cn":["","0-2500","2500-5000","5000-10000","10000-15000","15000-20000","20000-25000","20000-25000"],"value_en":["","0-2500","2500-5000","5000-10000","10000-15000","15000-20000","20000-25000","20000-25000"],"created_by":null,"create_time":"0","updated_by":"1","update_time":"0","column_type":"textArr","status":"1"}); */
+                if(typeof callback === 'function'){
+                    callback();
+                }
             },
 
-            init: function(){
+            init: function(options, callback){
                 var self = this;
                 self._initData();
                 self._initEven();
-                self._initEnd();
+                self._initEnd(callback);
                 console.log('fragmentsTpl模板启动中');
             }
         }
