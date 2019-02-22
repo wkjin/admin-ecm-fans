@@ -295,14 +295,14 @@ if(typeof commonPage === 'object'){
                         return;
                     }
                     //缩略图验证
-                    if(data.thumb_cn === '' && data.thumb_en === ''){
+                    /* if(data.thumb_cn === '' && data.thumb_en === ''){
                         swal({
                             title: '缩略图没有上传',
                             text: '中文、英文至少至少上传一个',
                             type: 'error'
                         });
                         return;
-                    }
+                    } */
                     data.sort = parseInt(data.sort);
                     if(data.sort < 0 || data.sort > 999){
                         swal({
