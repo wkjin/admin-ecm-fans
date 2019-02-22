@@ -186,14 +186,14 @@ var commonPage = {
                     if(me.isloadNum > 0){
                         $.showLoading();//加载数据
                     }
-                }, 2000);
+                }, 800);
                 self.$rightObj.find(self._options.rightContentContainerSelector).load(contentTplHtml, function(){
                     self[startTplFuncName].init(null, function(){
                         setTimeout(function(){
                             var me = commonPage;
                             me.isloadNum --;
                             $.hideLoading();//加载数据
-                        }, 800);
+                        }, 2000);
                     });//把tpl中的方法注入到本对象中
                 });
             }
