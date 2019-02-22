@@ -186,7 +186,7 @@ var commonPage = {
                     if(me.isloadNum > 0){
                         $.showLoading();//加载数据
                     }
-                }, 800);
+                }, 500);
                 self.$rightObj.find(self._options.rightContentContainerSelector).load(contentTplHtml, function(){
                     self[startTplFuncName].init(null, function(){
                         setTimeout(function(){
