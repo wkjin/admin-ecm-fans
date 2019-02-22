@@ -184,6 +184,7 @@ var commonPage = {
                     self.isloadNum ++;
                     setTimeout(function(){
                         var me = commonPage;
+                        console.log(me.isloadNum , '======>> 加载的数量');
                         if(me.isloadNum > 0){
                             $.showLoading();//加载数据
                         }else{
@@ -192,6 +193,7 @@ var commonPage = {
                     }, 800);
                     self[startTplFuncName].init(null, function(){
                         self.isloadNum --;
+                        console.log(self.isloadNum , '======>> 加载的数量');
                         $.hideLoading();//加载数据
                     });//把tpl中的方法注入到本对象中
                 });
