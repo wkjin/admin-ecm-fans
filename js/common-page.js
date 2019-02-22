@@ -182,7 +182,6 @@ var commonPage = {
                 var startTplFuncName = className + 'TplObj';
                 self.$rightObj.find(self._options.rightContentContainerSelector).load(contentTplHtml, function(){
                     $.showLoading();//加载数据
-                    console.log('======>> test', startTplFuncName);
                     self[startTplFuncName].init(null, function(){
                         $.hideLoading();//加载数据
                     });//把tpl中的方法注入到本对象中

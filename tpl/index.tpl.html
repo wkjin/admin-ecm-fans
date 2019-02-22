@@ -44,16 +44,13 @@ if(typeof commonPage === 'object'){
             },
 
             _initEnd: function(callback){
-                console.log('debug---------->>>', callback);
                 if(typeof callback === 'function'){
-                    
                     callback();
                 }
             },
 
             init: function(options, callback){
                 var self = this;
-                console.log('========>> debug ', callback);
                 self._initData();
                 self._initEven();
                 self._initEnd(callback);
