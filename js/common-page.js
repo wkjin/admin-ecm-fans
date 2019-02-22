@@ -180,14 +180,14 @@ var commonPage = {
                 //对左侧菜单选中，对右侧内容加载
                 var contentTplHtml = './tpl/' + className + '.tpl.html';
                 var startTplFuncName = className + 'TplObj';
+                self.isloadNum ++;
+                setTimeout(function(){
+                    var me = commonPage;
+                    if(me.isloadNum > 0){
+                        $.showLoading();//加载数据
+                    }
+                }, 500);
                 self.$rightObj.find(self._options.rightContentContainerSelector).load(contentTplHtml, function(){
-                    self.isloadNum ++;
-                    setTimeout(function(){
-                        var me = commonPage;
-                        if(me.isloadNum > 0){
-                            $.showLoading();//加载数据
-                        }
-                    }, 500);
                     self[startTplFuncName].init(null, function(){
                         self.isloadNum --;
                         $.hideLoading();//加载数据
