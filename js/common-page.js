@@ -190,7 +190,9 @@ var commonPage = {
                     }, 800);
                     self[startTplFuncName].init(null, function(){
                         $.hideLoading();//加载数据
-                        self.isloadNum --;
+                        setTimeout(function(){
+                            me.isloadNum --;
+                        }, 0);
                     });//把tpl中的方法注入到本对象中
                 });
             }
