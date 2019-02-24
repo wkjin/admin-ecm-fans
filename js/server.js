@@ -171,7 +171,7 @@ var server = {
                         if(me._ajaxNum > 0){
                             $.showLoading();//显示加载数据 
                         }
-                    }, 800);
+                    }, 200);
                 }
             },
             complete: function(){
