@@ -197,6 +197,6 @@
     $.fn.extend(Object.assign({},
         _jqueryTools,//jquery工具集合
         _uWebUploader,//文件上传工具（包括拖拽）
-        _uImgUpload,//图片上传控件
+        _uImgUpload//图片上传控件
     ));
 })(jQuery);

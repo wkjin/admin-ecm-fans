@@ -2,7 +2,7 @@ var server = {
     _options: {
         commonTools:  null,//公共工具对象（.commom.js提供）
         /* host: 'http://api.ecm-fans.com/v1.0/',//请求的根目录 */
-        host: 'http://api.ecm-fans.com/Admin/',//请求的根目录
+        host: 'http://api.ecm-fans.com.test/Admin/',//请求的根目录
 
         //获取信息的api定义
         loginUrl: 'Login/login',//登录url
