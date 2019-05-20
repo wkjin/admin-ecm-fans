@@ -7,6 +7,9 @@ var commonPage = {
         //容器
         pageContianerSelector: '.container',//页面的容器的选择器
 
+        //退出登录
+        logoutSelector: '.js-logout',//退出登录
+
         //左侧
         leftNavContainerSelector: '.left-nav-ul',//左侧导航条的容器
         leftNavContentAreaSelector: '.left-side',//左侧导航的内容区域
@@ -197,6 +200,20 @@ var commonPage = {
                     });//把tpl中的方法注入到本对象中
                 });
             }
+        });
+
+         //退出登录
+         self.$page.find(self._options.logoutSelector).off('click').on('click', function(e){
+            e.preventDefault();
+            swal({
+                title: '退出登录提醒',
+                text: '是否注销登录',
+                type: 'warning',
+                showCancelButton: true, 
+                closeOnConfirm: false, 
+                cancelButtonText: "取消", 
+                confirmButtonText: "注销", 
+            });
         });
     },
 

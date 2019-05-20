@@ -19,6 +19,9 @@ var headerObj = {
         //语言栏
         enButtonSelector: '.js-language-en',//英文按钮选择器
         cnButtonSelector: '.js-language-cn',//中文按钮选择器
+
+        //退出登录
+        logoutSelector: '.js-logout',//退出登录
     },
 
     commonPage: null,//公共页面对象
@@ -100,6 +103,7 @@ var headerObj = {
                 });
             }
         });
+
     },
 
 
