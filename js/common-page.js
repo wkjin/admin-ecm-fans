@@ -213,6 +213,23 @@ var commonPage = {
                 closeOnConfirm: false, 
                 cancelButtonText: "取消", 
                 confirmButtonText: "注销", 
+            }, function(status){
+                if(status){
+                    self.server.logout(function(res){
+                        if(res.status === 1){
+                            //登录成功
+                            swal({
+                                title: '退出登录成功',
+                                text: res.message,
+                                type: 'success',
+                                timer: 800
+                            });
+                            setTimeout(function(){
+                                window.location.href = './login.html';
+                            }, 1000);
+                        }
+                    });
+                }
             });
         });
     },

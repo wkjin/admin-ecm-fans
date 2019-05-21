@@ -6,6 +6,7 @@ var server = {
 
         //获取信息的api定义
         loginUrl: 'Login/login',//登录url
+        logoutUrl: 'Login/logout',//注销登录
         getProductsListUrl: 'Product/index',//获取产品列表的url
         getUserInfoUrl: 'User/getUserInfo',//获取用户信息
 
@@ -60,6 +61,11 @@ var server = {
     //登录
     login: function(data, callback){
         this.requestAndCallBack(data, this._options.loginUrl, callback, 'POST');
+    },
+
+    //注销登录
+    logout: function(callback){
+        this.requestAndCallBack(null, this._options.logoutUrl, callback, 'POST');
     },
 
     //获取用户信息
