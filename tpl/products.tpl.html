@@ -59,7 +59,7 @@
                     <div class="product-info">
                         <h4>产品信息</h4>
                         <div class="handle-area">
-                            <label for="impeller_diameter">叶轮直径</label>
+                            <label for="impeller_diameter">叶轮直径[mm]</label>
                             <select name="impeller_diameter" id="impeller_diameter" required>
                                 {{each  impellerDiameterArr it i}}
                                 <option value="{{it.name}}" {{if it.name == product.impeller_diameter }}selected{{/if}} >{{it.value}}</option>
@@ -67,7 +67,7 @@
                             </select>  
                         </div>
                         <div class="handle-area">  
-                            <label for="air_volume">风量[m³/h]</label>
+                            <label for="air_volume">最大风量[m³/h]</label>
                             <select name="air_volume" id="air_volume" required>
                                 {{each  airVolumeArr it i}}
                                 <option value="{{it.name}}" {{if it.name == product.air_volume }}selected{{/if}} >{{it.value}}</option>
@@ -99,7 +99,7 @@
                             </select>  
                         </div>
                         <div class="handle-area">
-                            <label for="atmospheric_pressure">大气压[Pa]</label>
+                            <label for="atmospheric_pressure">最大静压[Pa]</label>
                             <select name="atmospheric_pressure" id="atmospheric_pressure">
                                 {{each  atmosphericPressureArr it i}}
                                 <option value="{{it.name}}" {{if it.name == product.atmospheric_pressure }}selected{{/if}} >{{it.value}}</option>
@@ -107,7 +107,7 @@
                             </select>  
                         </div>
                         <div class="handle-area">
-                            <label for="speed">转速[min-1]</label>
+                            <label for="speed">最大功率[W]</label>
                             <select name="speed" id="speed">
                                 {{each  speedArr it i}}
                                 <option value="{{it.name}}" {{if it.name == product.speed }}selected{{/if}} >{{it.value}}</option>
@@ -122,7 +122,7 @@
                                 {{/each}}
                             </select>  
                         </div>
-                        <div class="handle-area">
+                        <div class="handle-area" style="display: none;">
                             <label for="specifications">规格</label>
                             <select name="specifications" id="specifications">
                                 {{each specificationsArr it i}}
