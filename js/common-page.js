@@ -19,7 +19,8 @@ var commonPage = {
             'categorys',
             'fragments',
             'articles',
-            'products'
+            'products',
+            'files'
         ],//栏目使用的class
 
         //右侧
@@ -276,6 +277,9 @@ var commonPage = {
             return;
         }
         var e = new self.E(selector);
+        //注册一个插入产品说明手册
+        
+
         var _options = {
             uploadImgServer: self.wangEditorFileServer,
             withCredentials: true,

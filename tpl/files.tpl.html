@@ -1,0 +1,155 @@
+<div class="content-files-container"></div>
+<div class="handle-bar js-handle-bar">
+    <button handle="addFile"><i class="fa fa-plus"></i></button>
+    <input type="file" style="display: none;" accept="application/pdf">
+    <input type="hidden" id="copy-text">
+</div>
+
+<script type="text/html" id="files-tpl">
+    <table>
+        <tr>
+            <th>文件名</th>
+            <th>查看链接</th>
+            <th>操作</th>
+        </tr>
+        {{each listData it i}}
+        <tr data-json="{{it}}">
+            <td>{{it.name}}</td>
+            <td><input type="text" value="{{it.url}}" style="width: 20em;"><button handle="copy">复制链接</button></td>
+            <td>
+                <button handle="show">查看</button>
+                <button handle="download">下载</button>
+                <button handle="delete">删除</button>
+            </th>
+        </tr>
+        {{/each}}
+    </table>
+</script>
+
+<script>
+    if (typeof commonPage === 'object') {
+        if (typeof commonPage.filesTplObj !== 'object') {
+            commonPage.filesTplObj = {
+                _options: {
+                    tplContainerSelector: '.content-files-container',//模板容器的选择器
+                    tplId: 'files-tpl',//模板id
+                    handlebarSelector: '.js-handle-bar'
+                },
+
+                $tpl: null,//模板容器
+                commonPage: null,
+                server: null,
+
+                _initData: function () {
+                    var self = this;
+
+                    self.$tpl = $(self._options.tplContainerSelector);
+
+                    //注入对象
+                    self.commonPage = commonPage;
+                    self.server = commonPage.server;
+
+                    //获取数据并填充
+                    self.server.getPDFFils(function (res) {
+                        if (res.status === 1) {
+                            var html = template(self._options.tplId, {
+                                listData: res.data
+                            });
+                            self.$tpl.html(html).off('click').on('click', '[handle]', function () {
+                                var $this = $(this);
+                                var file = $this.parents('tr').data('json');
+                                var handle = $this.attr('handle');
+                                var showUrl = file.url;
+                                switch (handle) {
+                                    case 'show':
+                                        window.open(showUrl);
+                                        break;
+                                    case 'download':
+                                        window.location.href = file.downloadUrl;
+                                        break;
+                                    case 'delete':
+                                        $.ajax({
+                                            type: 'get',
+                                            url: file.deleteUrl,
+                                            success: function (res) {
+                                                if (res.status === 1) {
+                                                    $this.parents('tr').remove();
+                                                }
+                                            }
+                                        });
+                                        break;
+                                    case 'copy':
+                                        var input = $this.parent().find('input')[0];
+                                        input.select(); // 选中文本
+                                        document.execCommand("copy"); // 执行浏览器复制命令
+                                        alert('已复制“' + file.name + '”查看链接')
+                                        break;
+                                    default:
+                                        console.error('操作类型:', handle);
+                                        throw new Error('操作类型无法识别！！！');
+                                        break;
+                                }
+                            });
+                        } else {
+                            swal({
+                                title: '获取信息失败',
+                                text: res.message,
+                                type: 'error'
+                            }, function () {
+                                window.history.go(0);
+                            });
+                        }
+                    });
+                    
+                },
+
+                _initEven: function () {
+                    var self = this;
+                    $(self._options.handlebarSelector).off('click change').on('click', '[handle]', function () {
+                        var $this = $(this);
+                        var handle = $this.attr('handle');
+                        switch (handle) {
+                            case 'addFile':
+                                $this.parent().find('input[type=file]').trigger('click');
+                                break;
+                            default:
+                                console.error('操作类型:', handle);
+                                throw new Error('操作类型无法识别！！！');
+                                break;
+                        }
+                    }).on('change', 'input[type=file]', function(){
+                        var $this = $(this);
+                        var fileObj = $(this)[0].files[0];
+                        var formFile = new FormData();
+                        formFile.append('file', fileObj);
+                        self.server.pdfUpload(formFile,function(res){
+                            $this.val('');
+                            if(res.errno === 0){
+                                self._initData();
+                            }else{
+                                alert('文件上传失败');
+                            }
+                        });
+                    });
+                },
+
+                _initEnd: function (callback) {
+                    var self = this;
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+                },
+
+                init: function (options, callback) {
+                    var self = this;
+                    self._initData();
+                    self._initEven();
+                    self._initEnd(callback);
+                    console.log('files模板启动中');
+                }
+            }
+        }
+    } else {
+        console.log('加载tpl必须在commonPage加载完毕后加载');
+    }  
+</script>

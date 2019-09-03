@@ -423,6 +423,13 @@ div .fullscreen-editor .w-e-text-container {
 .container > div.right-side > div.right-content-area > div.content-products-container table tr td:last-child {
   width: 8em;
 }
+.container > div.right-side > div.right-content-area > div.content-files-container table tr td {
+  text-align: center;
+}
+.container > div.right-side > div.right-content-area > div.content-files-container table tr td > button {
+  display: inline-block;
+  margin: 0 1em;
+}
 .container > div.right-side > div.right-content-area > div.handle-bar {
   position: absolute;
   z-index: 2;
