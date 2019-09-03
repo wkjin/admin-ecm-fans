@@ -12,6 +12,7 @@
             <th>查看链接</th>
             <th>操作</th>
         </tr>
+        {{if listData.length > 0}}
         {{each listData it i}}
         <tr data-json="{{it}}">
             <td>{{it.name}}</td>
@@ -23,6 +24,9 @@
             </th>
         </tr>
         {{/each}}
+        {{else/}}
+        <tr><td colspan="3">查询不到任何文件</td></tr>
+        {{/if}}
     </table>
 </script>
 
